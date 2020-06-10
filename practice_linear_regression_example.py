@@ -34,9 +34,11 @@ def run_optimization():
     with tf.GradientTape() as g:
         pred = linear_regression(X)
         loss = mean_square(pred, Y)
+    print("loss= ",loss,"\npred= ",pred,"\nY=",Y)
     #compute gradients
     gradients = g.gradient(loss,[W, b])
 
+    print("\ngradient=", gradients, "\nW=",W,"\nb= ",b)
     #update W and b following gradients
     optimizer.apply_gradients(zip(gradients, [W,b]))
 
@@ -47,7 +49,7 @@ for step in range(1, training_steps + 1):
     if step % display_step == 0:
         pred = linear_regression(X)
         loss = mean_square(pred, Y)
-        print("step %i, loss: %f, W: %f, b: %f" % ( step, loss, W.numpy(), b.numpy()))
+        #print("step %i, loss: %f, W: %f, b: %f" % ( step, loss, W.numpy(), b.numpy()))
 
 import matplotlib.pyplot as plt
 #Graph display
